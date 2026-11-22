@@ -23,3 +23,94 @@ npm run dev
 3. Cleanup은 언제 실행되는가? 개발 환경 StrictMode 영향은?
 4. `useState`와 `useRef`의 값 변경 시 렌더링 차이는?
 5. LAB 2와 LAB 4에서 Timer를 관리하는 방식의 차이는?
+
+## Project Information: 프로젝트 소개 및 Starter Project 정보
+
+## Installation: 설치·실행 방법 및 실행 화면
+Node.js 20.19+ 또는 22.12+ 권장. 프로젝트 폴더에서 실행:
+
+```bash
+npm install
+npm run dev
+```
+
+실행 화면
+![Alt text](week12%EC%8B%A4%ED%96%89%ED%99%94%EB%A9%B4.png)
+
+## Source Code Exploration: 주요 파일 구조, useEffect 및 useRef 분석, 주요 코드 2개 설명
+App.jsx, Lab1~4     
+
+useEffect를 통해서 정해진 이벤트가 발생하면(최초 마운트, 특정 값 변경 등) 함수를 실행하게 되며
+useRef를 통해서는 값이 변경되어도 리렌더링하지 않는 ref를 만들 수 있다.
+```jsx
+    // TODO 1: 1초마다 setCount(prev => prev + 1)을 실행할 setInterval 작성
+    // TODO 2: 만든 타이머 ID를 보관
+    // TODO 3: return Cleanup 함수에서 clearInterval 호출
+    // TODO 4: Dependency Array가 []일 때와 생략했을 때의 차이 관찰
+useEffect(() => {
+    const id = setInterval(() => {setCount(prev => prev + 1)}, 1000);
+    return () => {return clearInterval(id);}
+  }, []);
+```
+1초마다 setCount를 이용하여 그 전 값에 1씩을 더하고 언마운트 할 때는 clearInterval을 사용하여 타이머를 해제한다.
+
+```jsx
+  const timerRef = useRef(null);
+  const start = () => {
+    // TODO 2: timerRef.current에 타이머가 있으면 중복 시작 방지
+    if(timerRef.current !== null) return;
+    // TODO 3: setInterval의 반환 ID를 timerRef.current에 보관
+    timerRef.current = setInterval(() => {
+      setCount(prev => prev + 1);
+    }, 1000);
+    // TODO 4: 1초마다 count 증가, running을 true로 변경
+    setRunning(true);
+  };
+```
+timerRef라는 ref를 하나 만들어서 setInterval 할 때의 id를 저장하고 ref를 이용하여 타이머를 제어한다/
+
+## Lab Implementation: 4개 Lab 구현 내용 및 실행 결과
+1. 1초마다 카운트 수가 1씩 증가하는 타이머
+2. Start, Stop, Reset 기능이 있는 타이머
+3. ref를 이용하여 input 박스에 포커스를 적용하는 버튼 생성
+4. ref를 이용한 타이머. 화면은 Lab2와 동일
+
+## Lab Comparison: STEP 3의 비교 분석 질문 4개에 대한 답변
+1. Project Structure: App.jsx와 주요 Lab 컴포넌트의 역할
+import를 하는 부모 컴포넌트와 export를 하는 자식 컴포넌트
+2. useEffect: Effect, Dependency Array 및 Cleanup의 동작 원리   
+Dependency가 빈 배열이면 Cleanup이 언마운트 될 때만 한 번 실행되고 값이 있으면 그 값이 바뀔 때 cleanup을 먼저 하고 effect를 다시 실행한다. 아예 없으면 리렌더링 될 때마다 항상 cleanup이 실행된다.
+4. useRef: .current 속성과 useState의 차이
+ref의 값을 바꾸는 setter가 따로 없고 .current를 사용하여 값을 바꿀 수 있다. useState에서 setter로 값을 바꿀 때마다 리렌더링이 되지만 ref는 값을 바꿔도 리렌더링이 되지 않는다.
+5. Code Analysis: useEffect와 useRef 관련 주요 코드 각 1개(5~15줄)를 선택하여 동작 원리 설명
+``` jsx
+useEffect(() => {
+    const id = setInterval(() => {setCount(prev => prev + 1)}, 1000);
+    return () => {return clearInterval(id);}
+  }, []);
+```
+매번 리렌더링 될 때마다 타이머가 새로 추가되는 것을 막기 위하여 useEffect를 사용하여 타이머가 생성되는 때와 사라지는 때를 정확히 정해준다.
+
+```jsx
+const inputRef = useRef(null);
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  const clearInput = () => {
+    inputRef.current.value = "";
+    inputRef.current.focus();
+  };
+
+
+  <input ... ref={inputRef}/>
+```
+처음에는 빈 ref를 만들고 후에 연결한 뒤 current를 이용하여 해당 html 요소에 기능을 수행할 수 있다.
+
+## Customizing: 수정 내용 및 파일명
+
+## Deployment: 실제 접근 가능한 Vercel URL
+## Weekly Review:
+새롭게 배운 내용 3가지
+어려웠던 점과 해결 방법
+AI 활용 내용 및 느낀 점
