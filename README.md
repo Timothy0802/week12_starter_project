@@ -53,13 +53,17 @@ timerRef라는 ref를 하나 만들어서 setInterval 할 때의 id를 저장하
 4. ref를 이용한 타이머. 화면은 Lab2와 동일
 
 ## Lab Comparison: STEP 3의 비교 분석 질문 4개에 대한 답변
-1. Project Structure: App.jsx와 주요 Lab 컴포넌트의 역할
+1. Project Structure: App.jsx와 주요 Lab 컴포넌트의 역할  
 import를 하는 부모 컴포넌트와 export를 하는 자식 컴포넌트
-2. useEffect: Effect, Dependency Array 및 Cleanup의 동작 원리   
+
+2. useEffect: Effect, Dependency Array 및 Cleanup의 동작 원리 
 Dependency가 빈 배열이면 Cleanup이 언마운트 될 때만 한 번 실행되고 값이 있으면 그 값이 바뀔 때 cleanup을 먼저 하고 effect를 다시 실행한다. 아예 없으면 리렌더링 될 때마다 항상 cleanup이 실행된다.
-4. useRef: .current 속성과 useState의 차이
+
+3. useRef: .current 속성과 useState의 차이  
 ref의 값을 바꾸는 setter가 따로 없고 .current를 사용하여 값을 바꿀 수 있다. useState에서 setter로 값을 바꿀 때마다 리렌더링이 되지만 ref는 값을 바꿔도 리렌더링이 되지 않는다.
-5. Code Analysis: useEffect와 useRef 관련 주요 코드 각 1개(5~15줄)를 선택하여 동작 원리 설명
+
+4. Code Analysis: useEffect와 useRef 관련 주요 코드 각 1개(5~15줄)를 선택하여 동작 원리 설명
+
 ``` jsx
 useEffect(() => {
     const id = setInterval(() => {setCount(prev => prev + 1)}, 1000);
@@ -105,12 +109,13 @@ https://week12-starter-project-kohl.vercel.app/
 
 ## Weekly Review:
 새롭게 배운 내용 3가지    
-useState를 setter로 값을 변경하면 리렌더링이 된다.  
-useRef를 사용하면 값을 변경하더라도 리렌더링이 되지 않는다.   
-useRef는 .current를 사용하여 값을 참조할 수 있다.   
+1. useState를 setter로 값을 변경하면 리렌더링이 된다.  
+2. useRef를 사용하면 값을 변경하더라도 리렌더링이 되지 않는다.   
+3. useRef는 .current를 사용하여 값을 참조할 수 있다.   
 
 
 어려웠던 점과 해결 방법   
+
 어떻게 시작을 해야할지 감이 잘 오지 않았는데 Todo에 적힌 도움말과 강의 자료를 참고하여 해결할 수 있었음
 
 AI 활용 내용 및 느낀 점: .current를 쓰지 않아 생긴 오류를 바로 찾아줘서 쉽게 해결할 수 있었음
