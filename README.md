@@ -127,6 +127,13 @@ LAB2에서는 타이머 id를 상수가 가지고 있는데 LAB4에서는 timerR
 https://week12-starter-project-kohl.vercel.app/
 
 ## Weekly Review:
-새롭게 배운 내용 3가지
-어려웠던 점과 해결 방법
-AI 활용 내용 및 느낀 점
+새롭게 배운 내용 3가지    
+useState를 setter로 값을 변경하면 리렌더링이 된다.  
+useRef를 사용하면 값을 변경하더라도 리렌더링이 되지 않는다.   
+useRef는 .current를 사용하여 값을 참조할 수 있다.   
+
+
+어려웠던 점과 해결 방법   
+어떻게 시작을 해야할지 감이 잘 오지 않았는데 Todo에 적힌 도움말과 강의 자료를 참고하여 해결할 수 있었음
+
+AI 활용 내용 및 느낀 점: .current를 쓰지 않아 생긴 오류를 바로 찾아줘서 쉽게 해결할 수 있었음
