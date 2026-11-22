@@ -107,9 +107,25 @@ const inputRef = useRef(null);
 ```
 처음에는 빈 ref를 만들고 후에 연결한 뒤 current를 이용하여 해당 html 요소에 기능을 수행할 수 있다.
 
+### useEffect의 Dependency Array가 필요한 이유는?
+Dependency Array가 없으면 setCount를 통한 매 리렌더링 때마다 새로운 effect가 생성된다.
+
+### Cleanup을 사용하지 않으면 어떤 문제가 발생할 수 있는가?
+타이머가 눈에는 보이지 않을지라도 계속해서 백그라운드에서 실행되고 있다.
+
+### useState와 useRef의 가장 중요한 차이는?
+useState는 값이 변경될 때마다 리렌더링 되지만 ref는 그렇지 않다.
+
+### LAB 2와 LAB 4의 Timer 관리 방식은 어떻게 다른가?
+LAB2에서는 타이머 id를 상수가 가지고 있는데 LAB4에서는 timerRef가 가지고 있다.
+
 ## Customizing: 수정 내용 및 파일명
+1. App.jsx 프로젝트 제목 및 설명 수정
+2. App.css 글자 및 border 색상 변경
 
 ## Deployment: 실제 접근 가능한 Vercel URL
+https://week12-starter-project-kohl.vercel.app/
+
 ## Weekly Review:
 새롭게 배운 내용 3가지
 어려웠던 점과 해결 방법
